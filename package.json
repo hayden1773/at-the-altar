@@ -1,0 +1,30 @@
+{
+  "name": "at-the-altar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hayden1773/at-the-altar.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hayden1773/at-the-altar/issues"
+  },
+  "homepage": "https://github.com/hayden1773/at-the-altar#readme",
+  "dependencies": {
+    "connect-session-sequelize": "^7.1.4",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-sessions": "^1.0.6",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.20.1",
+    "sessions": "^0.0.2-7"
+  }
+}
