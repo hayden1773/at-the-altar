@@ -1,34 +1,33 @@
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes } = require("sequelize");
 
-const sequelize = require('../config/connection.js');
+const sequelize = require("../config/connection.js");
 //const bcrypt = require("bcrypt")
 
 class User extends Model {}
 
-User.init({
-    
+User.init(
+  {
     id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
     },
 
     username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        Unique: true
+      type: DataTypes.STRING,
+      allowNull: false,
+      Unique: true,
     },
 
     password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            len:[8]
-        }
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [8],
+      },
     },
-
-},
+  },
   {
     // hooks:{
     //     beforeCreate:async userdata=>{

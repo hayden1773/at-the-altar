@@ -1,40 +1,39 @@
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes } = require("sequelize");
 
-const sequelize = require('../config/connection.js');
+const sequelize = require("../config/connection.js");
 
 class Invitation extends Model {}
 
-Invitation.init({
-    
+Invitation.init(
+  {
     id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
     },
     user_id: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        references: {
-            model: 'user',
-            key: 'id'
-    }
+      type: DataTypes.STRING,
+      allowNull: false,
+      references: {
+        model: "user",
+        key: "id",
+      },
     },
-
     Invitee_name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        Unique: true
+      type: DataTypes.STRING,
+      allowNull: false,
+      Unique: true,
     },
 
     invitee_email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            isEmail: true
-        }
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isEmail: true,
+      },
     },
-},
+  },
   {
     sequelize,
   }
