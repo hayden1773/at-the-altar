@@ -15,7 +15,10 @@ Invitation.init({
     user_id: {
         type: DataTypes.STRING,
         allowNull: false,
-        Unique: true
+        references: {
+            model: 'user',
+            key: 'id'
+    }
     },
 
     Invitee_name: {
