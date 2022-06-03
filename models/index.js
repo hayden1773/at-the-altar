@@ -1,18 +1,15 @@
 const User = require("./User");
-const City = require("./City");
-const Country = require("./Country");
+//const City = require("./City");
+//const Country = require("./Country");
 const Invitation = require("./Invitation");
-const Venue = require("./Venue");
+//const Venue = require("./Venue");
 //const Itinary= require("./Itinary");
 
-// User.belongsToMany(Venue,{through: "User_Venue"}),
-// Venue.belongsToMany(User, {through: "User_Venue"}),
+// Country.hasMany(City),
+// City.belongsTo(Country),
 
-Country.hasMany(City),
-City.belongsTo(Country),
-
-City.hasMany(Venue);
-Venue.belongsTo(City),
+// City.hasMany(Venue);
+// Venue.belongsTo(City),
 
 User.hasOne(Invitation),
 Invitation.belongsTo(User),
@@ -22,9 +19,9 @@ Invitation.belongsTo(User),
 
 module.exports = {
     User,
-    City,
-    Country,
+    //City,
+    //Country,
     Invitation,
-    Venue,
+    //Venue,
     // Itinary,
 }

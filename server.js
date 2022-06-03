@@ -1,30 +1,26 @@
 const express = require("express");
 const allRoutes = require("./routes");
-const session = require("express-session");
+const cors = require("cors");
 const sequelize = require("./config/connection");
-const SequelizeStore = require("connect-session-sequelize")(session.Store);
+
 
 const app = express();
+
+//DEVELOP MODE
+app.use(cors());
+
+//PROD MODE
+// app.use(cors({
+//   origin:"https://boardgames-front.herokuapp.com"
+// }));
+
+
 const PORT = process.env.PORT || 3000;
 
 const { User, City, Country, Invitation, Itinary, Venue} = require("./models");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-const sess = {
-  secret: process.env.SESSION_SECRET,
-  cookie: {
-    maxAge: 5 * 60 * 60 * 1000
-  },
-  resave: false,
-  saveUninitialized: true,
-  store: new SequelizeStore({
-    db: sequelize
-  })
-};
-app.use(session(sess));
-
-//app.use(express.static('public'));
 
 app.use("/", allRoutes);
 

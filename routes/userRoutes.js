@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const {User, Venue} = require("../models/");
-//const bcrypt  = require("bcrypt");
+const bcrypt  = require("bcrypt");
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
+const {withAuth} = require("../utils/tokenAuth")
 
 //find all
 router.get('/', async (req, res) => {
@@ -17,15 +20,17 @@ router.get('/', async (req, res) => {
     }
   });
 
-  router.get("/logout",(req,res)=>{
-    req.session.destroy();
-    res.redirect("/")
+  router.get("/verifyToken",withAuth,(req,res)=>{
+    res.json({userId:req.user})
   })
 
   //find one
   router.get("/:id", (req, res) => {
     User.findByPk(req.params.id,{})
       .then(dbUser => {
+        if(!user) {
+          return res.status(404).json({msg:"no record found!"})
+      }
         res.json(dbUser);
       })
       .catch(err => {
@@ -36,13 +41,16 @@ router.get('/', async (req, res) => {
 
   //create a user
   router.post("/", (req, res) => {
-    User.create(req.body)
-      .then(newUser => {
-        req.session.user = {
-          id:newUser.id,
-          username:newUser.username
-        }
-        res.json(newUser);
+    User.create(req.body).then(newUser => {
+      const token = jwt.sign({
+        userId:newUser.id
+    },process.env.JWT_SECRET,{
+        expiresIn:"6h"
+    })
+    res.json({
+        user:newUser,
+        token:token
+    })
       })
       .catch(err => {
         console.log(err);
@@ -57,17 +65,21 @@ router.get('/', async (req, res) => {
     }
   }).then(foundUser=>{
       if(!foundUser){
-        return res.status(400).json({msg:"wrong login credentials"})
+        return res.status(401).json({msg:"wrong login credentials"})
       }
       if(bcrypt.compareSync(req.body.password,foundUser.password)){
-        req.session.user = {
-          id:foundUser.id,
-          username:foundUser.username
-        }
-        return res.json(foundUser)
-      } else {
+        const token = jwt.sign({
+          userId:foundUser.id
+      },process.env.JWT_SECRET,{
+          expiresIn:"6h"
+      })
+      return res.json({
+          user:foundUser,
+          token:token
+      })
+    }
         return res.status(400).json({msg:"wrong login credentials"})
-      }
+      
     }).catch(err => {
         console.log(err);
         res.status(500).json({ msg: "an error occured", err });
