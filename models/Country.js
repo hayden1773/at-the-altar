@@ -20,6 +20,7 @@ Country.init(
   },
   {
     sequelize,
+    modelName: "Country"
   }
 );
 

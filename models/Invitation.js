@@ -12,14 +12,14 @@ Invitation.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    user_id: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      references: {
-        model: "user",
-        key: "id",
-      },
-    },
+    // user_id: {
+    //   type: DataTypes.STRING,
+    //   allowNull: false,
+    //   references: {
+    //     model: "User",
+    //     key: "id",
+    //   },
+    // },
     Invitee_name: {
       type: DataTypes.STRING,
       allowNull: false,

@@ -14,9 +14,11 @@ router.get("/", async (req, res) => {
 
 //find by id
 router.get("/:id", (req, res) => {
-  Country.findByPk(req.params.id, {
-    include: [{ model: City }, {model: Venue}],
-  })
+  Country.findByPk(req.params.id
+  //   , {
+  //   include: [{ model: City }, {model: Venue}],
+  // }
+  )
     .then((countryData) => {
       res.json(countryData);
     })
