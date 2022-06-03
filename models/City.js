@@ -17,14 +17,14 @@ City.init(
       allowNull: false,
       Unique: true,
     },
-    country_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: "country",
-        key: "id",
-      },
-    },
+    // country_id: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false,
+    //   references: {
+    //     model: "Country",
+    //     key: "id",
+    //   },
+    // },
   },
   {
     sequelize,

@@ -3,28 +3,28 @@ const City = require("./City");
 const Country = require("./Country");
 const Invitation = require("./Invitation");
 const Venue = require("./Venue");
-const Itinary= require("./Itinary");
+//const Itinary= require("./Itinary");
 
-User.hasMany(Venue,{foreignKey: "user_id"}),
-Venue.hasMany(User),
+// User.belongsToMany(Venue,{through: "User_Venue"}),
+// Venue.belongsToMany(User, {through: "User_Venue"}),
 
-Country.hasMany(City,{foreignKey: "country_id"}),
+Country.hasMany(City),
 City.belongsTo(Country),
 
-City.hasMany(Venue,{foreignKey: "city_id"});
+City.hasMany(Venue);
 Venue.belongsTo(City),
 
-User.belongsTo(Invitation,{foreignKey: "user_id"}),
+User.hasOne(Invitation),
 Invitation.belongsTo(User),
 
-User.hasMany(Itinary, {foreignKey: "user_id"})
-Itinary.belongsTo(User)
+// User.hasMany(Itinary, {foreignKey: "user_id"})
+// Itinary.belongsTo(User)
 
 module.exports = {
     User,
-    Country,
     City,
+    Country,
     Invitation,
     Venue,
-    Itinary,
+    // Itinary,
 }
