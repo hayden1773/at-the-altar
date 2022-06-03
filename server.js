@@ -1,5 +1,5 @@
 const express = require("express");
-const allRoutes = require("./controllers");
+const allRoutes = require("./routes");
 const session = require("express-session");
 const sequelize = require("./config/connection");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
@@ -24,7 +24,7 @@ const sess = {
 };
 app.use(session(sess));
 
-app.use(express.static('public'));
+//app.use(express.static('public'));
 
 app.use("/", allRoutes);
 

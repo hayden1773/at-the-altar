@@ -8,9 +8,9 @@ const venueRoutes = require("./venueRoutes");
 router.use("/api/venues",venueRoutes)
 
 const countryRoutes = require("./countryRoutes");
-router.use("/api/venues",countryRoutes)
+router.use("/api/countries",countryRoutes)
 
 const cityRoutes = require("./cityRoutes");
-router.use("/api/venues",cityRoutes)
+router.use("/api/cities",cityRoutes)
 
 module.exports = router;

@@ -6,9 +6,11 @@ const {User, Venue} = require("../models/");
 //find all
 router.get('/', async (req, res) => {
     try {
-      const wedUser = await User.findAll({
-        include: [{ model: Venue }]
-      });
+      const wedUser = await User.findAll(
+      //   {
+      //   include: [{ model: Venue }]
+      // }
+      );
       res.status(200).json(wedUser);
     } catch (err) {
       res.status(500).json({ msg: "an error occured", err });

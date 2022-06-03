@@ -14,9 +14,7 @@ router.get("/", async (req, res) => {
 
 //find by id
 router.get("/:id", (req, res) => {
-  Venue.findByPk(req.params.id, {
-    include: [{ model: User }],
-  })
+  Venue.findByPk(req.params.id)
     .then((venueData) => {
       res.json(venueData);
     })
