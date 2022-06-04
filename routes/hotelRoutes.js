@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const { Venue, User, } = require("../models/");
+const { Hotel, User, } = require("../models/");
 
 //find all
 router.get("/", async (req, res) => {
   try {
-    const venueList = await Venue.findAll();
-    res.status(200).json(venueList);
+    const hotelList = await Hotel.findAll();
+    res.status(200).json(hotelList);
   } catch (err) {
     res.status(500).json({ msg: "an error occured", err });
   }
@@ -14,9 +14,9 @@ router.get("/", async (req, res) => {
 
 //find by id
 router.get("/:id", (req, res) => {
-  Venue.findByPk(req.params.id)
-    .then((venueData) => {
-      res.json(venueData);
+  Hotel.findByPk(req.params.id)
+    .then((hotelData) => {
+      res.json(hotelData);
     })
     .catch((err) => {
       console.log(err);
@@ -25,14 +25,16 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-    Venue.create({
-        venue_name:req.body.venue_name,
+
+    console.log(req.user)
+    Hotel.create({
+        hotel_name:req.body.hotel_name,
         venue_picture:req.body.venue_picture,
         contact_phone:req.body.contact_phone,
-        venue_address:req.body.venue_address,
+        hotel_address:req.body.hotel_address,
     })
-      .then((newVenue) => {
-        res.json(newVenue);
+      .then((newHotel) => {
+        res.json(newHotel);
       })
       .catch((err) => {
         console.log(err);

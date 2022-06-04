@@ -2,9 +2,9 @@ const { Model, DataTypes } = require("sequelize");
 
 const sequelize = require("../config/connection.js");
 
-class Venue extends Model {}
+class Hotel extends Model {}
 
-Venue.init(
+Hotel.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -12,19 +12,21 @@ Venue.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    venue_name: {
+    hotel_name: {
       type: DataTypes.STRING,
       allowNull: false,
       Unique: true,
     },
-    venue_picture: {
+    // hotel_picture: {
+    //     type: DataTypes.STRING,
+    //     Unique: true,
+    //   },
+    hotel_address: {
         type: DataTypes.STRING,
+        allowNull: false,
         Unique: true,
       },
-      venue_address: {
-        type: DataTypes.STRING,
-      },
-
+      
     contact_phone: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -43,4 +45,4 @@ Venue.init(
   }
 );
 
-module.exports = Venue;
+module.exports = Hotel;
