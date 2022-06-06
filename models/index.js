@@ -6,6 +6,9 @@ const Venue = require("./Venue");
 const Event = require("./Event")
 //const Itinary= require("./Itinary");
 
+User.hasMany(Venue),
+Venue.belongsTo(User)
+
 User.hasMany(Event),
 Event.belongsTo(User),
 
