@@ -74,7 +74,7 @@ router.get('/', async (req, res) => {
           expiresIn:"6h"
       })
       return res.json({
-          user:foundUser,
+          user:foundUser.username,
           token:token
       })
     }
