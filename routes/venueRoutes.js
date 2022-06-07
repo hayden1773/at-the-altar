@@ -40,4 +40,18 @@ router.post("/", (req, res) => {
       });
   });
 
+  router.delete("/:id", (req, res) => {
+    Venue.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(delVenue => {
+      res.json(delVenue);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ msg: "an error occured", err });
+    });
+  });
+
 module.exports = router;

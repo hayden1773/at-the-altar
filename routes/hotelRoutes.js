@@ -42,4 +42,18 @@ router.post("/", (req, res) => {
       });
   });
 
+  router.delete("/:id", (req, res) => {
+    Hotel.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(delHotel => {
+      res.json(delHotel);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ msg: "an error occured", err });
+    });
+  });
+
 module.exports = router;
