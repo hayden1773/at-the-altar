@@ -23,7 +23,9 @@ router.get('/', async (req, res) => {
 
   //find by id
 router.get("/:id", (req, res) => {
-  Event.findByPk(req.params.id)
+  Event.findByPk(req.params.id, {
+    include:[Hotel, Venue]
+  })
     .then((eventData) => {
       res.json(eventData);
     })
@@ -50,6 +52,19 @@ router.post("/", (req, res) => {
       console.log(err);
       res.status(500).json({ msg: "an error occured", err });
     });
+});
+router.delete("/:id", (req, res) => {
+  Event.destroy({
+    where: {
+      id: req.params.id
+    }
+  }).then(delEvent => {
+    res.json(delEvent);
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json({ msg: "an error occured", err });
+  });
 });
 
 module.exports = router;

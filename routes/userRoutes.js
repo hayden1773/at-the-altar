@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {User, Venue} = require("../models/");
+const {User, Venue, Hotel, Event, Invite} = require("../models/");
 const bcrypt  = require("bcrypt");
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
@@ -9,11 +9,7 @@ const {withAuth} = require("../utils/tokenAuth")
 //find all
 router.get('/', async (req, res) => {
     try {
-      const wedUser = await User.findAll(
-      //   {
-      //   include: [{ model: Venue }]
-      // }
-      );
+      const wedUser = await User.findAll();
       res.status(200).json(wedUser);
     } catch (err) {
       res.status(500).json({ msg: "an error occured", err });
@@ -26,7 +22,9 @@ router.get('/', async (req, res) => {
 
   //find one
   router.get("/:id", (req, res) => {
-    User.findByPk(req.params.id,{})
+    User.findByPk(req.params.id,{
+      include:[Event]
+    })
       .then(dbUser => {
         if(!user) {
           return res.status(404).json({msg:"no record found!"})
