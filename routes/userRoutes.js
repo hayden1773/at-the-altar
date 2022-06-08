@@ -23,10 +23,12 @@ router.get('/', async (req, res) => {
   //find one
   router.get("/:id", (req, res) => {
     User.findByPk(req.params.id,{
-      include:[Event]
+      include:[{model:Event, 
+        include: [Hotel, Venue, Invite] 
+      }]
     })
       .then(dbUser => {
-        if(!user) {
+        if(!dbUser) {
           return res.status(404).json({msg:"no record found!"})
       }
         res.json(dbUser);
@@ -73,6 +75,7 @@ router.get('/', async (req, res) => {
       })
       return res.json({
           user:foundUser.username,
+          userId:foundUser.id,
           token:token
       })
     }
