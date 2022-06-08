@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {User, Venue, Hotel,Event} = require("../models");
+const {Invite, User, Venue, Hotel,Event} = require("../models");
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
 const {withAuth} = require("../utils/tokenAuth")
@@ -10,11 +10,9 @@ const {withAuth} = require("../utils/tokenAuth")
 
 router.get('/', async (req, res) => {
     try {
-      const wedEvent = await Event.findAll(
-        {
-        include: [{ model: Venue }, { model: Hotel }, { model: User }]
-      }
-      );
+      const wedEvent = await Event.findAll({
+        include:[Hotel, Venue, Invite]
+      });
       res.status(200).json(wedEvent);
     } catch (err) {
       res.status(500).json({ msg: "an error occured", err });
@@ -24,7 +22,7 @@ router.get('/', async (req, res) => {
   //find by id
 router.get("/:id", (req, res) => {
   Event.findByPk(req.params.id, {
-    include:[Hotel, Venue]
+    include:[Hotel, Venue, Invite]
   })
     .then((eventData) => {
       res.json(eventData);

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Hotel, User, } = require("../models/");
+const { Hotel, User, Event} = require("../models/");
 
 //find all
 router.get("/", async (req, res) => {
@@ -14,7 +14,9 @@ router.get("/", async (req, res) => {
 
 //find by id
 router.get("/:id", (req, res) => {
-  Hotel.findByPk(req.params.id)
+  Hotel.findByPk(req.params.id, {
+    include:[Event]
+  })
     .then((hotelData) => {
       res.json(hotelData);
     })

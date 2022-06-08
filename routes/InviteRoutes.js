@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {User, Invite} = require("../models");
+const {User, Invite, Event} = require("../models");
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
 const {withAuth} = require("../utils/tokenAuth")
@@ -23,7 +23,9 @@ router.get('/', async (req, res) => {
 
   //find by id
 router.get("/:id", (req, res) => {
-  Invite.findByPk(req.params.id)
+  Invite.findByPk(req.params.id, {
+    include:[Event]
+  })
     .then((inviteData) => {
       res.json(inviteData);
     })
@@ -35,13 +37,14 @@ router.get("/:id", (req, res) => {
 
 router.post("/", (req, res) => {
 
-    console.log(req.user)
+  console.log("999999999")
+    console.log(req.body)
     Invite.create({
-        EventId:req.EventId,
+        EventId:req.body.EventId,
         guest_name:req.body.guest_name,
         couple_avatar:req.body.couple_avatar,
         guest_email:req.body.guest_email,
-        isAtending:req.body.isAttending,
+        isAttending:req.body.isAttending,
     })
       .then((newInvite) => {
         res.json(newInvite);
