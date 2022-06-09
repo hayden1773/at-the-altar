@@ -7,8 +7,8 @@ router.use("/api/users",userRoutes)
 const venueRoutes = require("./venueRoutes");
 router.use("/api/venues",venueRoutes)
 
-const inviteRoutes = require("./inviteRoutes");
-router.use("/api/invites",inviteRoutes)
+const invitationRoutes = require("./invitationRoutes");
+router.use("/api/invites",invitationRoutes)
 
 const eventRoutes = require("./eventRoutes");
 router.use("/api/events",eventRoutes)
