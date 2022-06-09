@@ -1,5 +1,5 @@
-// const sequelize = require("../config/connection")
-// const {User, City, Country, Invitation, Itinary, Venue} = require("../models")
+const sequelize = require("../config/connection")
+const {User, City, Country, Invitation, Itinary, Venue} = require("../models")
 
 
 
@@ -41,30 +41,30 @@
 //     },
 // ]
 
-// const users = [
-//     {
-//         username: "seval",
-//         password: "password",
-//     },
-//     {
-//         username: "seval2",
-//         password: "password2",
-//     }
+const users = [
+    {
+        username: "seval",
+        password: "password",
+    },
+    {
+        username: "hayden",
+        password: "hayden12",
+    }
 
-// ]
+]
 
-// const feedSeed = async () => {
-//     await sequelize.sync({force:true})
-//     try{
+const feedSeed = async () => {
+    await sequelize.sync({force:true})
+    try{
         
 //         await Country.bulkCreate(countries);
 //         await City.bulkCreate(cities);
 //         await Venue.bulkCreate(venues);
-//         await User.bulkCreate(users);
-//         process.exit(0);
-//     } catch (err){
-//         console.log(err);
-//     }
-// }
+        await User.bulkCreate(users);
+        process.exit(0);
+    } catch (err){
+        console.log(err);
+    }
+}
 
-// feedSeed()
+feedSeed()
