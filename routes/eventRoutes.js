@@ -33,13 +33,13 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.post("/", (req, res) => {
+router.post("/", withAuth, (req, res) => {
 
-    console.log(req.user)
+    console.log("who is user",req.user)
     Event.create({
        HotelId:req.body.HotelId,
        VenueId:req.body.VenueId,
-       UserId:req.body.UserId,
+       UserId:req.user,
        wedding_date:req.body.wedding_date,
        event_duration:req.body.event_duration
     })
