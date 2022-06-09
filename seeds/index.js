@@ -1,5 +1,6 @@
 const sequelize = require("../config/connection")
 const {User, City, Country, Invitation, Itinary, Venue} = require("../models")
+const { options } = require("../routes")
 
 
 
@@ -60,7 +61,7 @@ const feedSeed = async () => {
 //         await Country.bulkCreate(countries);
 //         await City.bulkCreate(cities);
 //         await Venue.bulkCreate(venues);
-        await User.bulkCreate(users);
+        await User.bulkCreate(users, {individualHooks:true});
         process.exit(0);
     } catch (err){
         console.log(err);
