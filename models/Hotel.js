@@ -2,8 +2,10 @@ const { Model, DataTypes } = require("sequelize");
 
 const sequelize = require("../config/connection.js");
 
-class Hotel extends Model {}
+class Hotel extends Model { }
 
+
+// HOTEL MODEL THAT SAVES UNDER ID
 Hotel.init(
   {
     id: {
@@ -12,21 +14,19 @@ Hotel.init(
       autoIncrement: true,
       primaryKey: true,
     },
+    // REQUESTS HOTEL NAME
     hotel_name: {
       type: DataTypes.STRING,
       allowNull: false,
       Unique: true,
     },
-    // hotel_picture: {
-    //     type: DataTypes.STRING,
-    //     Unique: true,
-    //   },
+    //  REQUESTS HOTEL ADDRESS
     hotel_address: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        Unique: true,
-      },
-      
+      type: DataTypes.STRING,
+      allowNull: false,
+      Unique: true,
+    },
+    // REQUESTS HOTEL PHONE NUMBER > MUST BE PHONE VALIDATED NUMBER FORMATTING > NOT INTERNATIONAL FORMATTING
     contact_phone: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -37,7 +37,7 @@ Hotel.init(
         },
       },
     },
-    
+
   },
   {
     sequelize,

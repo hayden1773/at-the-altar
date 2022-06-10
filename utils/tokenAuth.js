@@ -1,3 +1,5 @@
+// FUNCTION THAT CREATES AND VERIFIES TOKEN
+
 const jwt = require("jsonwebtoken");
 const withAuth = function (req, res, next) {
   const token = req.headers?.authorization?.split(" ").pop();
@@ -8,7 +10,7 @@ const withAuth = function (req, res, next) {
   try {
     const info = jwt.verify(token, process.env.JWT_SECRET);
     console.log(info);
-    req.user= info.userId
+    req.user = info.userId
     next()
   } catch (err) {
     return res.status(401).json({ msg: "invalid credentials" });
@@ -16,5 +18,5 @@ const withAuth = function (req, res, next) {
 };
 
 module.exports = {
-    withAuth
+  withAuth
 }

@@ -2,8 +2,9 @@ const { Model, DataTypes } = require("sequelize");
 
 const sequelize = require("../config/connection.js");
 
-class Invite extends Model {}
+class Invite extends Model { }
 
+// INVITATION MODEL REQUEST
 Invite.init(
   {
     id: {
@@ -12,44 +13,23 @@ Invite.init(
       autoIncrement: true,
       primaryKey: true,
     },
-
-    // user_id: {
-    //   type: DataTypes.STRING,
-    //   allowNull: false,
-    //   references: {
-    //     model: "User",
-    //     key: "id",
-    //   },
-    // },
-    // venue_name: {
-    //   type: DataTypes.STRING,
-    //   allowNull: false,
-    // },
-
-    // duration: {
-    //   type: DataTypes.INTEGER,
-    //   allowNull: false,
-    // },
-
+    // SAVES UNDER PICTURE OF COUPLE
     couple_avatar: {
       type: DataTypes.STRING,
     },
 
-    // hotel_tobook: {
-    //   type: DataTypes.STRING,
-    //   allowNull: false,
-    // },
+    // NAME FOR INVITED GUEST
     guest_name: {
       type: DataTypes.STRING,
       allowNull: false,
       Unique: true,
     },
-
+    // GUEST EMAIL > LINKED TO EMAIL.JS FOR SENDING 
     guest_email: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-      isEmail: true,
+        isEmail: true,
       },
     },
 

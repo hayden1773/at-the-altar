@@ -6,20 +6,16 @@ const sequelize = require("./config/connection");
 
 const app = express();
 
-//DEVELOP MODE
-app.use(cors());
 
-//PROD MODE
-// app.use(cors({
-//   origin:"https://boardgames-front.herokuapp.com"
-// }));
+// PRODUCTION MODE
+app.use(cors({
+  origin:"https://donw-the-isle.herokuapp.com"
+}));
 
 
 // Cloudinary
 const { cloudinary } = require('./utils/cloudinary.js');
-// const express = require('express');
-// const app = express();
-// var cors = require('cors');
+
 
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
@@ -52,7 +48,7 @@ app.post('/api/upload', async (req, res) => {
 
 const PORT = process.env.PORT || 3001;
 
-const { User, City, Country, Invitation, Itinary, Venue} = require("./models");
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
