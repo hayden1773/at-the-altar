@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Venue, User, Event} = require("../models/");
+const { Venue, User, Event } = require("../models/");
 
 //find all
 router.get("/", async (req, res) => {
@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
 //find by id
 router.get("/:id", (req, res) => {
   Venue.findByPk(req.params.id, {
-    include:[Event]
+    include: [Event]
   })
     .then((venueData) => {
       res.json(venueData);
@@ -26,34 +26,38 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.post("/", (req, res) => {
-    Venue.create({
-        venue_name:req.body.venue_name,
-        venue_picture:req.body.venue_picture,
-        contact_phone:req.body.contact_phone,
-        venue_address:req.body.venue_address,
-    })
-      .then((newVenue) => {
-        res.json(newVenue);
-      })
-      .catch((err) => {
-        console.log(err);
-        res.status(500).json({ msg: "an error occured", err });
-      });
-  });
 
-  router.delete("/:id", (req, res) => {
-    Venue.destroy({
-      where: {
-        id: req.params.id
-      }
-    }).then(delVenue => {
-      res.json(delVenue);
+// CREATE A VENUE
+router.post("/", (req, res) => {
+  Venue.create({
+    venue_name: req.body.venue_name,
+    venue_picture: req.body.venue_picture,
+    contact_phone: req.body.contact_phone,
+    venue_address: req.body.venue_address,
+  })
+    .then((newVenue) => {
+      res.json(newVenue);
     })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ msg: "an error occured", err });
+    });
+});
+
+
+// DELETE A VENUE
+router.delete("/:id", (req, res) => {
+  Venue.destroy({
+    where: {
+      id: req.params.id
+    }
+  }).then(delVenue => {
+    res.json(delVenue);
+  })
     .catch(err => {
       console.log(err);
       res.status(500).json({ msg: "an error occured", err });
     });
-  });
+});
 
 module.exports = router;

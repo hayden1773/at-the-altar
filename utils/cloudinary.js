@@ -1,5 +1,5 @@
 require('dotenv').config();
-
+// CLOUDINARY API KEY
 const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Hotel, User, Event} = require("../models/");
+const { Hotel, User, Event } = require("../models/");
 
 //find all
 router.get("/", async (req, res) => {
@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
 //find by id
 router.get("/:id", (req, res) => {
   Hotel.findByPk(req.params.id, {
-    include:[Event]
+    include: [Event]
   })
     .then((hotelData) => {
       res.json(hotelData);
@@ -26,36 +26,38 @@ router.get("/:id", (req, res) => {
     });
 });
 
+// CREATE HOTEL
 router.post("/", (req, res) => {
 
-    console.log(req.user)
-    Hotel.create({
-        hotel_name:req.body.hotel_name,
-        venue_picture:req.body.venue_picture,
-        contact_phone:req.body.contact_phone,
-        hotel_address:req.body.hotel_address,
+  console.log(req.user)
+  Hotel.create({
+    hotel_name: req.body.hotel_name,
+    venue_picture: req.body.venue_picture,
+    contact_phone: req.body.contact_phone,
+    hotel_address: req.body.hotel_address,
+  })
+    .then((newHotel) => {
+      res.json(newHotel);
     })
-      .then((newHotel) => {
-        res.json(newHotel);
-      })
-      .catch((err) => {
-        console.log(err);
-        res.status(500).json({ msg: "an error occured", err });
-      });
-  });
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ msg: "an error occured", err });
+    });
+});
 
-  router.delete("/:id", (req, res) => {
-    Hotel.destroy({
-      where: {
-        id: req.params.id
-      }
-    }).then(delHotel => {
-      res.json(delHotel);
-    })
+// DELETE HOTEL
+router.delete("/:id", (req, res) => {
+  Hotel.destroy({
+    where: {
+      id: req.params.id
+    }
+  }).then(delHotel => {
+    res.json(delHotel);
+  })
     .catch(err => {
       console.log(err);
       res.status(500).json({ msg: "an error occured", err });
     });
-  });
+});
 
 module.exports = router;
